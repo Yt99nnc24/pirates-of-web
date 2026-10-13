@@ -14,14 +14,7 @@ We are Pirates of Web, a team of four collaborating to turn ideas into useful so
 
 Project description, goals, and features will be added once the team selects an idea.
 
-## Team Members
 
-| Member | Name | Role |
-| --- | --- | --- |
-| 1 | [Add name] | [Add role] |
-| 2 | [Add name] | [Add role] |
-| 3 | [Add name] | [Add role] |
-| 4 | [Add name] | [Add role] |
 
 ## Technology Stack
 

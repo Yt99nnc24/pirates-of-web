@@ -6,7 +6,7 @@
 
 We are Pirates of Web, a team of four collaborating to turn ideas into useful solutions through creativity, teamwork, and code.
 
-> This repository is being prepared for the hackathon on October 14, 2026. Our final project has not been selected. We will add the actual project files during the hackathon.
+> This repository is being prepared for the hackathon on October 14, 2026.We will add the actual project files during the hackathon.
 
 ## Upcoming Project
 

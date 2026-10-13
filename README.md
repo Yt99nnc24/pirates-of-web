@@ -1,52 +1,38 @@
-# Hackathon 2026
 
-## Pirates of Web
+# 🏴‍☠️ Pirates of Web
 
-**Code. Create. Conquer.**
+### Code. Create. Conquer.
 
-We are Pirates of Web, a team of four collaborating to turn ideas into useful solutions through creativity, teamwork, and code.
+Welcome to the official GitHub repository of **Team Pirates of Web**!
 
-> This repository is being prepared for the hackathon on October 14, 2026.We will add the actual project files during the hackathon.
+## 🚀 Hackathon
+**Commit to Change: Hackathon | IEEE Day 2026**
 
-## Upcoming Project
+## 👥 About Our Team
+We are a team of four enthusiastic developers, passionate about technology, innovation, and solving real-world problems.
 
-**To Be Announced**
+## 💡 Our Project
+**Project Title:** To Be Announced
 
-Project description, goals, and features will be added once the team selects an idea.
+**Problem Statement:** To Be Announced
 
+**Proposed Solution:** To Be Announced
 
+Our project will be developed during the hackathon.
 
-## Technology Stack
+## 🛠️ Technology Stack
+To be finalized based on our project requirements.
 
-**To Be Decided**
+## 📁 Repository Structure
+- `src/` — Project source code
+- `docs/` — Documentation
+- `assets/` — Images and resources
 
-We will document our chosen languages, frameworks, and tools here.
+## 📌 Current Status
+Repository initialized and ready for development.
 
-## Development Roadmap
+## 🎯 Our Mission
+To collaborate, innovate, and create a meaningful solution using technology.
 
-- [x] Prepare the starter repository.
-- [ ] Select the project idea and define its scope.
-- [ ] Choose the technology stack and assign responsibilities.
-- [ ] Build and test the core features.
-- [ ] Update documentation and prepare the final demo.
-
-## Repository Structure
-
-```text
-pirates-of-web/
-├── README.md
-├── .gitignore
-├── LICENSE
-├── docs/
-│   └── README.md
-├── src/
-│   └── README.md
-└── assets/
-    └── README.md
-```
-
-Setup and run instructions will be added after the project and technology stack are selected.
-
-## License
-
-A license has not been selected. See [LICENSE](LICENSE) for the current placeholder.
+---
+Made with 💻 by **Team Pirates of Web**

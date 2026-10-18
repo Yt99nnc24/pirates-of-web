@@ -5,8 +5,7 @@
 
 Welcome to the official GitHub repository of **Team Pirates of Web**!
 
-## 🚀 Hackathon
-**Commit to Change: Hackathon | IEEE Day 2026**
+
 
 ## 👥 About Our Team
 We are a team of four enthusiastic developers, passionate about technology, innovation, and solving real-world problems.

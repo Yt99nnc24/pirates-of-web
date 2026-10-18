@@ -11,7 +11,19 @@ from werkzeug.security import (
 )
 from dotenv import load_dotenv
 from db import get_db
+from flask import render_template
 
+@app.route("/doctor")
+def doctor_dashboard():
+    # Use your existing authentication and data-fetching logic here.
+    # These are examples of the variables your template requires.
+    return render_template(
+        "doctor.html",
+        name=doctor.name,
+        role=doctor.role,
+        profile=profile,
+        cases=cases
+    )
 load_dotenv()
 
 def get_db():

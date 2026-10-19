@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLINEXA</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }       
-                
-    </style>
-</head>
-<body>
-    <h1>Welcome to CLINEXA</h1>
-    <p>Smarter healthcare through connected medical records</p>
-    <h2>Choose your role</h2>
-    <button onclick="window.location.href='doctorlogin.html'">I am a doctor</button>
-    <button onclick="window.location.href='patientlogin.html'">I am a patient</button>
-    <script>                                                                                    
-        // You can add JavaScript code here if needed
-    </script>   
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+<header class="site-header wrap"><a class="brand" href="{{ url_for('home') }}"><span class="brand-icon">+</span> CLINEXA<span class="brand-dot">.</span></a><a class="text-link" href="#how-it-works">How it works <span>↗</span></a></header>
+<main id="main">
+<section class="hero wrap"><div class="hero-copy"><span class="eyebrow"><span class="live-dot"></span> CARE STARTS WITH A CONVERSATION</span><h1>Better connected.<br>Better <em>understood.</em></h1><p>Bring patient concerns and clinician reviews into one clear, considered workspace. Less scattered information. More room for the conversation.</p><a class="btn" href="#portals">Find your space <span>↗</span></a><div class="hero-note"><span class="mini-cross">+</span><span>A healthcare workflow prototype.<br><strong>Built around people, reviewed by people.</strong></span></div></div><div class="hero-visual" aria-label="Illustration of the consultation workflow"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="visual-caption">THE NEXT STEP, MADE CLEAR.</div><div class="care-card"><div class="care-top"><span class="mini-cross">+</span><span>YOUR CARE JOURNEY</span><span class="tag">CONNECTED</span></div><h2>One story.<br>A clearer next step.</h2><div class="journey-row"><span class="step-dot">✓</span><div><strong>Concern shared</strong><small>In the patient’s own words</small></div></div><div class="journey-row"><span class="step-dot">02</span><div><strong>Ready for review</strong><small>Organized by department</small></div></div><div class="journey-row last"><span class="step-dot pale">03</span><div><strong>A human response</strong><small>Notes you can return to</small></div></div><div class="card-bottom"><span class="live-dot"></span> ILLUSTRATIVE WORKFLOW · NO PATIENT DATA</div></div><div class="floating-note"><span>↗</span><div>Clarity at every step.<small>From concern to review.</small></div></div></div></section>
+<section class="portal-section wrap" id="portals"><div class="section-heading"><div><span class="eyebrow">TWO SPACES. ONE CONNECTION.</span><h2>Where would you like to start?</h2></div><p>A focused experience for each side<br>of the consultation.</p></div><div class="portal-grid"><a class="portal-card" href="{{ url_for('patient_login') }}"><span class="portal-icon">◎</span><span class="eyebrow">FOR PATIENTS</span><h3>Your story matters.</h3><p>Share a concern, track its progress and read your clinician’s review in one place.</p><span class="portal-link">Enter patient space <span>↗</span></span></a><a class="portal-card doctor-portal" href="{{ url_for('doctor_login') }}"><span class="portal-icon">+</span><span class="eyebrow">FOR CLINICIANS</span><h3>A little more perspective.</h3><p>Review your department’s queue and write clear, considered consultation notes.</p><span class="portal-link">Enter clinician workspace <span>↗</span></span></a></div></section>
+<section class="how-section wrap" id="how-it-works"><span class="eyebrow">SIMPLE BY DESIGN</span><div class="how-grid"><h2>From the first concern<br>to a documented review.</h2><div><span class="number">01</span><h3>Share</h3><p>Describe the concern and choose a care department.</p></div><div><span class="number">02</span><h3>Review</h3><p>An approved doctor in that department reviews the case.</p></div><div><span class="number">03</span><h3>Keep track</h3><p>See the status and read the finalized notes.</p></div></div></section>
+<section class="prototype-banner wrap"><span class="mini-cross">i</span><p><strong>A demonstration, with clear boundaries.</strong> Use fictional information only. CLINEXA does not provide automated diagnosis, emergency services or a replacement for professional care.</p></section>
+</main><footer class="site-footer wrap"><span>CLINEXA / Built by Pirates of Web</span><span>Thoughtfully connected.</span></footer>
+{% endblock %}

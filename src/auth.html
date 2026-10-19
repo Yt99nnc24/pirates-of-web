@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ role|capitalize }} {{ 'registration' if action=='signup' else 'sign in' }} · CLINEXA{% endblock %}
+{% block body %}
+<header class="site-header wrap"><a class="brand" href="{{ url_for('home') }}"><span class="brand-icon">+</span> CLINEXA<span class="brand-dot">.</span></a><a class="text-link" href="{{ url_for('home') }}">← Choose another portal</a></header>
+<main class="auth-shell wrap" id="main">
+  <section class="auth-story"><span class="eyebrow light">{{ 'YOUR PRACTICE, IN FOCUS' if role=='doctor' else 'YOUR HEALTH, IN ONE PLACE' }}</span><h1>{{ 'More clarity.\nMore time for care.' if role=='doctor' else 'A little more clarity.\nA better conversation.' }}</h1><p>{{ 'A considered workspace for reviewing concerns and documenting the next step.' if role=='doctor' else 'Organize your concerns, share your story and keep track of your consultation.' }}</p><div class="story-lines"><span>01 &nbsp; {{ 'Review the right department' if role=='doctor' else 'Tell your story' }}</span><span>02 &nbsp; {{ 'See the patient’s own words' if role=='doctor' else 'Follow your case status' }}</span><span>03 &nbsp; {{ 'Write a clear, human review' if role=='doctor' else 'Read the clinician’s notes' }}</span></div><small>Built by Pirates of Web<br>Fictional-data demonstration</small></section>
+  <section class="auth-form"><span class="tag">{{ 'CLINICIAN WORKSPACE' if role=='doctor' else 'PATIENT SPACE' }}</span><h2>{{ 'Create your account' if action=='signup' else 'Welcome back.' }}</h2><p class="muted">{{ 'Start with a few details.' if action=='signup' else 'Sign in to pick up where you left off.' }}</p>
+    {% include 'messages.html' %}
+    {% if error %}<div class="flash error" role="alert">{{ error }}</div>{% endif %}
+    <form method="post" class="stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="{{ action }}">
+      {% if action=='signup' %}<div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" minlength="2" maxlength="80" value="{{ request.form.get('name','') }}" required></div>{% endif %}
+      <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" value="{{ request.form.get('email','') }}" required></div>
+      {% if role=='doctor' and action=='signup' %}<div class="field"><label for="department">Department</label><select id="department" name="department" required><option value="">Choose a department</option>{% for department in departments %}<option{% if request.form.get('department')==department %} selected{% endif %}>{{ department }}</option>{% endfor %}</select></div><div class="field"><label for="specialization">Specialization</label><input id="specialization" name="specialization" minlength="2" maxlength="100" value="{{ request.form.get('specialization','') }}" required></div><p class="small muted">Doctor accounts require administrator approval before sign-in.</p>{% endif %}
+      <div class="field"><label for="password">Password</label><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="{{ 'new-password' if action=='signup' else 'current-password' }}" minlength="{{ 8 if action=='signup' else 1 }}" maxlength="128" required><button class="password-toggle" type="button" data-password="password" aria-controls="password" aria-pressed="false">Show</button></div>{% if action=='signup' %}<small class="muted">Use at least 8 characters.</small>{% endif %}</div>
+      <button class="btn full" type="submit">{{ 'Create account' if action=='signup' else 'Sign in' }} <span>→</span></button>
+    </form>
+    <p class="auth-switch">{{ 'Already registered?' if action=='signup' else 'New to CLINEXA?' }} <a href="{{ url_for(role+'_login', action='login' if action=='signup' else 'signup') }}">{{ 'Sign in' if action=='signup' else 'Create an account' }}</a></p>
+    {% if demo_enabled %}<form method="post" action="{{ url_for('demo',role=role) }}" class="demo-box"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><span class="eyebrow">JUST EXPLORING?</span><p>Open a fictional workspace. No password needed.</p><button class="btn secondary full">Explore {{ role }} demo ↗</button></form>{% endif %}
+    <p class="small muted">Prototype only. Do not enter real patient or medical information.</p>
+  </section>
+</main><footer class="site-footer wrap">CLINEXA / Pirates of Web <span>Thoughtfully connected.</span></footer>
+{% endblock %}

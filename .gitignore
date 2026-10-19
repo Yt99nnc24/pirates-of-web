@@ -61,3 +61,11 @@ secrets/
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# Local CLINEXA runtime and test data
+src/instance/
+*.sqlite3
+*.sqlite3-*
+.test-tmp/
+tests/.data-*/
+

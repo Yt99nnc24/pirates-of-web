@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'workspace.html' %}{% block title %}Your care space · CLINEXA{% endblock %}
+{% block content %}
+<section class="welcome"><div><span class="eyebrow">YOUR HEALTH, AT YOUR PACE</span><h1>Hello, {{ current_user.name.split()[0] }}.</h1><p>How can we help you prepare for your next conversation?</p></div><a class="btn" href="#new-case">Share a concern +</a></section>
+<div class="stats"><div class="stat"><span>Your cases</span><strong>{{ cases|length }}</strong><small>All concerns you’ve shared</small></div><div class="stat"><span>Awaiting review</span><strong>{{ cases|selectattr('status','equalto','pending')|list|length }}</strong><small>Ready for the clinician</small></div><div class="stat"><span>Reviewed</span><strong>{{ cases|selectattr('status','equalto','reviewed')|list|length }}</strong><small>Notes available to read</small></div></div>
+<section class="panel" id="new-case"><div class="panel-head"><div><span class="eyebrow">START WITH YOUR STORY</span><h2>What would you like to discuss?</h2><p>Keep it specific. Only use fictional details in this prototype.</p></div><span class="panel-symbol">+</span></div><form class="stack" method="post" action="{{ url_for('create_case') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><div class="field"><label for="department">Care department</label><select name="department" id="department" required><option value="">Choose a department</option>{% for department in departments %}<option>{{ department }}</option>{% endfor %}</select></div><div class="field"><label for="symptoms">Your concern</label><textarea id="symptoms" name="symptoms" minlength="10" maxlength="3000" rows="4" placeholder="For example: I’d like to discuss a change in my sleep routine…" required aria-describedby="concern-help"></textarea><small id="concern-help" class="muted">10–3,000 characters. Include when it began and what you want to discuss.</small></div><div class="form-bottom"><p class="small muted">This is a review request, not an appointment booking.</p><button class="btn">Submit concern →</button></div></form></section>
+<section class="panel" id="cases"><div class="panel-head"><div><span class="eyebrow">YOUR TIMELINE</span><h2>My cases</h2></div><span class="tag">{{ cases|length }} TOTAL</span></div>{% for case in cases %}<article class="case-item"><div class="case-item-top"><div><span class="case-id">CASE #{{ '%04d'|format(case.id) }}</span><h3>{{ case.department }}</h3></div><span class="status {{ case.status }}">{{ 'Reviewed' if case.status=='reviewed' else 'Awaiting review' }}</span></div><p class="concern">{{ case.symptoms }}</p><span class="small muted">Submitted {{ case.created_at }} UTC</span>{% if case.status=='reviewed' %}<div class="review-note"><span class="eyebrow">CLINICIAN’S REVIEW</span><p>{{ case.notes }}</p><small class="muted">Reviewed {{ case.reviewed_at }} UTC</small></div>{% endif %}</article>{% else %}<div class="empty"><span>◎</span><h3>A clear place to begin.</h3><p>Your submitted concerns will appear here.<br>Share your first fictional case above.</p></div>{% endfor %}</section>
+<div class="notice"><strong>For urgent concerns</strong><p>This prototype is not monitored for emergencies. Seek appropriate professional or emergency assistance outside this application.</p></div>
+{% endblock %}

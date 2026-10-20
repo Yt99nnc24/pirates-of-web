@@ -1,6 +1,7 @@
 """CLINEXA: a fictional-data consultation workflow prototype."""
 import hmac
 import os
+import re
 import secrets
 import sqlite3
 from datetime import timedelta
@@ -80,7 +81,7 @@ def create_app(test_config=None):
         if request.method == "POST":
             supplied = request.form.get("csrf_token", "")
             expected = session.get("csrf", "")
-            if not supplied or not expected or not hmac.compare_digest(supplied, expected):
+            if not supplied or not expected or not hmac.compare_digest(supplied.encode('utf-8'), expected.encode('utf-8')):
                 abort(400, description="Your form session expired. Refresh the page and try again.")
         else:
             csrf_token()
@@ -121,7 +122,7 @@ def create_app(test_config=None):
         if request.method == "POST":
             email = request.form.get("email", "").strip().lower()
             password = request.form.get("password", "")
-            if len(email) > 254 or "@" not in email or len(password) > 128:
+            if len(email) > 254 or not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", email) or len(password) > 128:
                 error = "Enter a valid email and a password of at most 128 characters."
             elif action == "signup":
                 name = request.form.get("name", "").strip()

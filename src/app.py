@@ -4,12 +4,12 @@ import os
 import re
 import secrets
 import sqlite3
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 from pathlib import Path
 
 import click
-from flask import Flask, abort, flash, g, redirect, render_template, request, session, url_for
+from flask import Flask, abort, flash, g, jsonify, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
 DEPARTMENTS = ("General medicine", "Ayurveda", "Homeopathy", "Dental care", "Physiotherapy")
@@ -168,6 +168,16 @@ def create_app(test_config=None):
     def patient_dashboard():
         cases = db().execute("SELECT * FROM cases WHERE patient_id=? ORDER BY id DESC", (g.user["id"],)).fetchall()
         return render_template("patient.html", cases=cases)
+
+    @app.route("/patient/export", methods=["POST"])
+    @require_role("patient")
+    def export_patient_cases():
+        rows = db().execute("""SELECT id,department,symptoms,status,notes,created_at,reviewed_at
+            FROM cases WHERE patient_id=? ORDER BY id DESC""", (g.user["id"],)).fetchall()
+        response = jsonify(schema_version=1, exported_at=datetime.now(timezone.utc).isoformat(),
+                           timestamp_timezone="UTC", cases=[dict(row) for row in rows])
+        response.headers["Content-Disposition"] = 'attachment; filename="clinexa-case-history.json"'
+        return response
 
     @app.route("/cases", methods=["POST"])
     @require_role("patient")

@@ -99,6 +99,18 @@ class WorkflowTests(unittest.TestCase):
         self.app.config['ENABLE_DEMO'] = False
         self.assertEqual(self.post(outsider, '/demo/patient').status_code, 404)
 
+    def test_malformed_csrf_and_email_are_rejected(self):
+        self.client.get('/patient-login')
+        for token in ('wrong-token', '\u0905\u092e\u093e\u0928\u094d\u092f'):
+            response = self.client.post('/patient-login', data={'csrf_token': token})
+            self.assertEqual(response.status_code, 400)
+        for email in ('missing-domain@', 'two@@example.test', 'a b@example.test', 'a@example'):
+            response = self.signup(self.client, 'patient', email)
+            self.assertIn(b'Enter a valid email', response.data)
+        with sqlite3.connect(self.app.config['DATABASE']) as conn:
+            self.assertEqual(conn.execute('SELECT COUNT(*) FROM users').fetchone()[0], 0)
+        conn.close()
+
 
 if __name__ == '__main__':
     unittest.main()

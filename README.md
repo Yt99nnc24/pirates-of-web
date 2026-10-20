@@ -8,6 +8,7 @@ A patient-and-clinician consultation workflow prototype. Patients share a fictio
 - Registration, hashed passwords, role-based sign-in and logout.
 - Administrator approval for doctor accounts through a Flask CLI command.
 - Patient case creation, status tracking and finalized review notes.
+- Patient-owned JSON history downloads, including submitted concerns and finalized notes. Downloads require a patient session and a valid form token; account credentials and other patients' cases are excluded.
 - Doctor department queue, search/status filters and one-time review finalization.
 - CSRF checks for every POST, server-side validation and escaped user content.
 - Optional fictional demo workspaces, separated per browser session.
